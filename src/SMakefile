@@ -1,0 +1,34 @@
+#################################################
+#
+# SAS/C Makefile for "Emu68HDMI-AHI-Mixer".
+# AmigaOS M68K SAS/C 6.59 Compiler.
+#
+# Every object lists the local headers its source includes (directly or
+# transitively): without it a plain smake links a stale object built with an
+# older struct layout, which crashes.
+#
+#################################################
+
+OUTFILE=Emu68HDMI-AHI-Mixer
+
+OBJECTS=Main.o GUI.o Prefs.o Update.o Driver.o DrvAsm.o HW.o DSP.o Scope.o Test.o LE32.o
+
+all: $(OUTFILE)
+
+clean:
+	@delete $(OBJECTS)
+
+$(OUTFILE): $(OBJECTS)
+	sc MATH=standard LIB:amiga.lib TO $(OUTFILE) LINK $(OBJECTS)
+
+Main.o:   Main.c GUI.h Test.h Scope.h DSP.h Update.h Prefs.h
+GUI.o:    GUI.c GUI.h Test.h Scope.h DSP.h Update.h Prefs.h
+Prefs.o:  Prefs.c Prefs.h Scope.h DSP.h
+Update.o: Update.c GUI.h Test.h Update.h Scope.h DSP.h Driver.h DrvDefs.h HW.h
+Test.o:   Test.c Test.h AhiPragmas.h Driver.h DrvDefs.h
+Driver.o: Driver.c Driver.h DrvDefs.h
+DrvAsm.o: DrvAsm.a
+HW.o:     HW.c HW.h LE32.h
+DSP.o:    DSP.c DSP.h
+Scope.o:  Scope.c Scope.h DSP.h
+LE32.o:   LE32.a

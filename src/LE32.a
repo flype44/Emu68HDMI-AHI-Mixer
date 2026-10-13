@@ -1,0 +1,14 @@
+
+	SECTION .text
+
+	XDEF	_asm_le32
+
+	cnop 0,4
+
+_asm_le32:
+	ror.w    #8,d0
+	swap     d0
+	ror.w    #8,d0
+	rts
+
+	end
