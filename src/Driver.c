@@ -85,7 +85,7 @@ VOID DrvRead(struct DriverInfo * info)
 	info->features      = (ULONG)DrvQuery(driver, HDMI_QUERY_FEATURES);
 
 	if ((info->features & HDMI_FEATURE_GAIN) != 0) {
-		info->gain = (ULONG)DrvQuery(driver, HDMI_QUERY_GAIN);
+		info->gain = (ULONG)DrvQuery(driver, HDMI_AHIC_OUTPUTVOLUME_QUERY);
 	}
 
 	info->state         = (ULONG)DrvQuery(driver, HDMI_QUERY_STATE);
@@ -130,7 +130,7 @@ BOOL DrvReadGain(ULONG * features, ULONG * gain)
 	*features = (ULONG)DrvQuery(driver, HDMI_QUERY_FEATURES);
 
 	if ((*features & HDMI_FEATURE_GAIN) != 0) {
-		*gain = (ULONG)DrvQuery(driver, HDMI_QUERY_GAIN);
+		*gain = (ULONG)DrvQuery(driver, HDMI_AHIC_OUTPUTVOLUME_QUERY);
 	}
 
 	CloseLibrary(driver);
@@ -148,7 +148,7 @@ BOOL DrvSetGain(ULONG gain)
 	}
 
 	if ((((ULONG)DrvQuery(driver, HDMI_QUERY_FEATURES)) & HDMI_FEATURE_GAIN) != 0) {
-		done = (DrvControl(driver, HDMI_SET_GAIN, (LONG)gain) != 0);
+		done = (DrvControl(driver, HDMI_AHIC_OUTPUTVOLUME, (LONG)gain) != 0);
 	}
 
 	CloseLibrary(driver);

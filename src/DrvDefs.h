@@ -5,7 +5,7 @@
  * The driver answers them through its AHIsub_HardwareControl() vector (the
  * same channel HDMIDiag uses). An attribute a driver does not know returns 0,
  * so an original 4.16 driver simply reports fewer things: HDMI_QUERY_FEATURES
- * is 0 there and 3 in the 4.16-dma-irq driver (bit 0: the interrupt queries
+ * is 0 there and 3 in the 4.17 driver (bit 0: the interrupt queries
  * exist, bit 1: master volume). Values come from the status.h of the driver sources (ahi/status.h).
  *
  ******************************************************************************/
@@ -30,8 +30,10 @@
 #define HDMI_QUERY_PRE_SKIPS      0x48444dc0UL
 #define HDMI_QUERY_RESYNC_AT      0x48444dc1UL
 #define HDMI_QUERY_FEATURES       0x48444dc2UL
-#define HDMI_QUERY_GAIN           0x48444dc4UL   /* master volume, Q16: 65536 = unity */
-#define HDMI_SET_GAIN             0x48444dc3UL   /* the one write: argument is the new master volume, Q16 */
+/* The master volume is the standard one of AHI (devices/ahi.h): AHIC_OutputVolume / AHIC_OutputVolume_Query = TAG_USER + 87 / 88,
+** a Fixed value (0x10000 = unity). AHI Prefs shows it as the Output volume of a unit. */
+#define HDMI_AHIC_OUTPUTVOLUME        (0x80000000UL + 87UL)
+#define HDMI_AHIC_OUTPUTVOLUME_QUERY  (0x80000000UL + 88UL)
 
 /* HDMI_QUERY_FEATURES bits */
 #define HDMI_FEATURE_IRQ          0x01UL         /* interrupt driver: the interrupt queries exist */

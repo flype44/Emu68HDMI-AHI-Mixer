@@ -1,10 +1,10 @@
 # Emu68HDMI-AHI-Mixer 0.1
 
-A MUI tool for the **Emu68 HDMI AHI driver** (4.16-dma-irq): it shows what the driver is doing, draws a live scope of the sound
+A MUI tool for the **Emu68 HDMI AHI driver** (4.17): it shows what the driver is doing, draws a live scope of the sound
 leaving the Amiga, sets the driver's master volume and plays test sounds through it.
 
 Requirements: Emu68 on a Raspberry Pi 4 (BCM2711), AHI, MUI 3.8, AmigaOS 3.1+. The master volume and the full Driver page need
-the **4.16-dma-irq** driver; with the original 4.16 driver the Driver page shows fewer values and the volume is greyed out. The Scope
+the **4.17** driver; with the original 4.16 driver the Driver page shows fewer values and the volume is greyed out. The Scope
 page works with any driver that plays through HDMI.
 
 ## Install
@@ -25,7 +25,8 @@ not (a test sound always starts at -30 dB).
 
 ## Master volume
 
-A slider (-60 to 0 dB) and a Mute button on the Scope page, also in the Audio menu (Mute `M`, Louder `+`, Quieter `-`). The driver
+A slider (-60 to 0 dB) and a Mute button on the Scope page, also in the Audio menu (Mute `M`, Louder `+`, Quieter `-`). They drive
+the standard output volume of AHI (`AHIC_OutputVolume`), the same value as the Output volume of the unit in AHI Prefs. The driver
 applies the gain while it packs the samples: exact at 0 dB, a 43 ms ramp when it moves. The driver forgets it when it is unloaded;
 the Mixer gives it back (within half a second) as long as it is running. AHI's own volumes are not touched.
 
