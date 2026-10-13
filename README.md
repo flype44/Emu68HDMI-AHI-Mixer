@@ -1,11 +1,15 @@
 # Emu68HDMI-AHI-Mixer 0.1
 
-A MUI tool for the **Emu68 HDMI AHI driver** (4.17): it shows what the driver is doing, draws a live scope of the sound
+A MUI tool for the **[Emu68 HDMI AHI driver](https://github.com/arczi84/emu68-hdmi-audio)** by Arczi (4.17): it shows what the driver is doing, draws a live scope of the sound
 leaving the Amiga, sets the driver's master volume and plays test sounds through it.
 
 Requirements: Emu68 on a Raspberry Pi 4 (BCM2711), AHI, MUI 3.8, AmigaOS 3.1+. The master volume and the full Driver page need
 the **4.17** driver; with the original 4.16 driver the Driver page shows fewer values and the volume is greyed out. The Scope
 page works with any driver that plays through HDMI.
+
+Driver 4.17 is proposed in [pull request #1](https://github.com/arczi84/emu68-hdmi-audio/pull/1) of that repository; until it is merged,
+its sources and binaries are on the [`irq-lowlatency-volume` branch](https://github.com/flype44/emu68-hdmi-audio/tree/irq-lowlatency-volume)
+of the fork.
 
 ## Install
 
